@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Like, type: :model do
-
   let(:like_with_user) { Like.new user: users(:juan) }
   let(:like_with_post) { Like.new post: posts(:post) }
   let(:like) { Like.new post: posts(:post), user: users(:juan) }

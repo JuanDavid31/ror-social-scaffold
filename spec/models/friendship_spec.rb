@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Friendship, type: :model do
-
   let(:friendship_with_user_1) { Friendship.new user1: users(:juan) }
   let(:friendship_with_user_2) { Friendship.new user2: users(:arnold) }
   let(:friendship_with_status) { Friendship.new status: 'Pending' }

@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Comment, type: :model do
-
   let(:comment_with_content) { Comment.new content: 'This is some serious content' }
   let(:comment_with_user) { Comment.new user: users(:juan) }
   let(:comment_with_post) { Comment.new post: posts(:post) }
