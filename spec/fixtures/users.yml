@@ -5,6 +5,7 @@ juan:
   encrypted_password: 12345678
 
 arnold:
+  id: 2
   name: Arnold
   email: arnold@sample.com
   encrypted_password: 12345678
