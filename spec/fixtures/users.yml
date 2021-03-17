@@ -1,0 +1,9 @@
+juand:
+  name: Juan
+  email: johndoe@sample.com
+  encrypted_password: 12345678
+
+arnold:
+  name: Arnold
+  email: arnold@sample.com
+  encrypted_password: 12345678
