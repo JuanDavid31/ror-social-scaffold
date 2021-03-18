@@ -16,7 +16,7 @@ class UsersController < ApplicationController
 
   def send_friend_request
     user_id = params[:user_id]
-    user_2 = User.find user_id
+    user2 = User.find user_id
     Friendship.create(user1: current_user, user2: user_2, status: 'Pending')
     redirect_to user_path id: user_id
   end
