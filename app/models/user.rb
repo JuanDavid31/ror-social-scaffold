@@ -31,12 +31,32 @@ class User < ApplicationRecord
     User.find_by_sql [sql, id]
   end
 
+  def friend_responses
+    sql = "select u1.*, status
+            from users u1
+            inner join friendships f on u1.id = f.user_1
+            inner join users u2 on u2.id = f.user_2
+            where (status = 'Pending' OR status = 'Rejected')
+            and u2.id = ?"
+    User.find_by_sql [sql, id]
+  end
+
   def pending_friend_responses
-    sql = "select u2.*
+    sql = "select u1.*, status
             from users u1
             inner join friendships f on u1.id = f.user_1
             inner join users u2 on u2.id = f.user_2
             where status = 'Pending'
+            and u2.id = ?"
+    User.find_by_sql [sql, id]
+  end
+
+  def rejected_friend_responses
+    sql = "select u1.*, status
+            from users u1
+            inner join friendships f on u1.id = f.user_1
+            inner join users u2 on u2.id = f.user_2
+            where status = 'Rejected'
             and u2.id = ?"
     User.find_by_sql [sql, id]
   end
