@@ -2,10 +2,15 @@
   <div class="user-header">
     <h2><%= "Name: #{@user.name}" %></h2>
 
-    <% if @is_friend %>
+    <% if current_user.id == @user.id # Logged in user is the same one that is in the view %>
+    <% elsif @is_friend %>
       <h3> is your friend </h3>
     <% elsif @request_sent %>
       <h3> Friend request sent </h3>
+    <% elsif @request_received && @request_received.status == 'Pending' %>
+      <h3> Is waiting for your response </h3>
+    <% elsif @request_received && @request_received.status == 'Rejected' %>
+      <h3>Friend request rejected</h3>
     <% else %>
       <%= link_to 'Send friend request', send_friend_request_path(@user), method: :post %>
     <% end %>

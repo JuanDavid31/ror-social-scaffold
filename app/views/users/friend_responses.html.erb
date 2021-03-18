@@ -1,0 +1,16 @@
+<table>
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Status</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <% @responses.each do |response| %>
+    <tr>
+      <th><%= response.name %></th>
+      <th><%= response.status %></th>
+
+    </tr>
+  <% end %>
+</table>
