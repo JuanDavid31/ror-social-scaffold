@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Post, type: :feature do
-
   fixtures :all
 
   context 'When a user signs in' do
