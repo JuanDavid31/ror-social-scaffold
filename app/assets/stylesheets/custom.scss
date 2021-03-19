@@ -314,6 +314,12 @@ form {
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    form.button_to {
+      input {
+        width: 100%;
+      }
+    }
   }
 }
 

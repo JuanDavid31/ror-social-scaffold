@@ -12,8 +12,9 @@
     <% elsif @request_received && @request_received.status == 'Rejected' %>
       <h3>Friend request rejected</h3>
     <% else %>
-      <%= link_to 'Send friend request', send_friend_request_path(@user), method: :post %>
-    <% end %>
+      <%#= link_to 'Send friend request', send_friend_request_path(@user), method: :post %>
+      <%= button_to 'Send friend request', { :controller => "users", :action => "send_friend_request", :user_id => @user.id , :method=>:post }  %>
+  <% end %>
   </div>
 
   <article class="timeline">
