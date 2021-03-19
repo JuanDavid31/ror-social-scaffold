@@ -21,8 +21,18 @@ class User < ApplicationRecord
     User.find_by_sql [sql, id]
   end
 
+  def friends?(user)
+    sql = "select f.*
+            from users u1
+            inner join friendships f on u1.id = f.user_1
+            inner join users u2 on u2.id = f.user_2
+            where status = 'Accepted'
+            AND ((u1.id = ? AND u2.id = ?) OR (u1.id = ? AND u2.id = ?))"
+    User.find_by_sql([sql, id, user.id, user.id, id]).first
+  end
+
   def pending_friend_requests
-    sql = "select u2.*
+    sql = "select u2.*, status
             from users u1
             inner join friendships f on u1.id = f.user_1
             inner join users u2 on u2.id = f.user_2

@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
   helper_method :send_friend_request_path
+  helper_method :accept_friend_request_path
+  helper_method :reject_friend_request_path
 
   def index
     @users = User.all
@@ -10,7 +12,8 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @posts = @user.posts.ordered_by_most_recent
 
-    @is_friend = current_user.friends.one? { |friend| friend.id == @user.id }
+    current_user.friends.each { |f| p f }
+    @is_friend = current_user.friends? @user
     @request_sent = @user.friend_responses.one? { |u| u.id == current_user.id }
     @request_received = current_user.friend_responses.detect { |response| response.id == @user.id }
   end
@@ -26,11 +29,31 @@ class UsersController < ApplicationController
     "/send_friend_request?user_id=#{user.id}"
   end
 
+  def accept_friend_request_path(user)
+    "/accept_friend_request?user_id=#{user.id}"
+  end
+
+  def reject_friend_request_path(user)
+    "/reject_friend_request?user_id=#{user.id}"
+  end
+
   def friend_requests
     @requests = current_user.pending_friend_requests
   end
 
   def friend_responses
     @responses = current_user.friend_responses
+  end
+
+  def accept_friend_request
+    Friendship.where(user_1: params[:user_id], user_2: current_user.id)
+      .update(status: 'Accepted')
+    redirect_to '/friend_responses'
+  end
+
+  def reject_friend_request
+    Friendship.where(user_1: params[:user_id], user_2: current_user.id)
+      .update(status: 'Rejected')
+    redirect_to '/friend_responses'
   end
 end

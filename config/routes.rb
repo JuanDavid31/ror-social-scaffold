@@ -13,5 +13,7 @@ Rails.application.routes.draw do
   post '/send_friend_request', to: 'users#send_friend_request'
   get '/friend_requests', to: 'users#friend_requests'
   get '/friend_responses', to: 'users#friend_responses'
+  post '/accept_friend_request', to: 'users#accept_friend_request'
+  post '/reject_friend_request', to: 'users#reject_friend_request'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

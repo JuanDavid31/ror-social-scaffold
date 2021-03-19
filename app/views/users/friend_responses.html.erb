@@ -10,7 +10,10 @@
     <tr>
       <th><%= response.name %></th>
       <th><%= response.status %></th>
-
+      <% if response.status == 'Pending' %>
+        <th><%= link_to 'Accept', accept_friend_request_path(response), method: :post %></th>
+        <th><%= link_to 'Reject', reject_friend_request_path(response), method: :post %></th>
+      <% end %>
     </tr>
   <% end %>
 </table>
