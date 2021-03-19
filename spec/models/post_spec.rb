@@ -19,4 +19,11 @@ RSpec.describe Post, type: :model do
       expect(post_with_content_and_user.valid?).to be true
     end
   end
+
+  describe '#relative_posts' do
+    it 'does return user and friends posts' do
+      user = users(:juan)
+      expect(user.relative_posts.length).to be 2
+    end
+  end
 end

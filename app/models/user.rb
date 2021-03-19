@@ -60,4 +60,23 @@ class User < ApplicationRecord
             and u2.id = ?"
     User.find_by_sql [sql, id]
   end
+
+  def relative_posts
+    sql = "select posts.*, u.name
+            from posts
+            inner join users u on posts.user_id = u.id
+            where user_id in
+              (select user_1
+               from friendships
+               where (user_1 = ? or user_2 = ?)
+               and status = 'Accepted'
+               union
+               select user_2
+               from friendships
+               where (user_1 = ? or user_2 = ?)
+               and status = 'Accepted')
+            or user_id = ?
+            order by created_at desc"
+    Post.find_by_sql [sql, id, id, id, id, id]
+  end
 end
