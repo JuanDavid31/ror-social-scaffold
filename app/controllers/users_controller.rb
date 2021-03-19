@@ -12,7 +12,6 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @posts = @user.posts.ordered_by_most_recent
 
-    current_user.friends.each { |f| p f }
     @is_friend = current_user.friends? @user
     @request_sent = @user.friend_responses.one? { |u| u.id == current_user.id }
     @request_received = current_user.friend_responses.detect { |response| response.id == @user.id }

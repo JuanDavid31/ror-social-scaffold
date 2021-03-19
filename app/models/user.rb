@@ -11,16 +11,6 @@ class User < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :friendships
 
-  def friends
-    sql = "select u2.*
-            from users u1
-            inner join friendships f on u1.id = f.user_1
-            inner join users u2 on u2.id = f.user_2
-            where status = 'Accepted'
-            and u1.id = ?"
-    User.find_by_sql [sql, id]
-  end
-
   def friends?(user)
     sql = "select f.*
             from users u1
