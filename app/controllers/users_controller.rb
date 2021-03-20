@@ -1,5 +1,9 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
+
+  helper_method :friend?
+  helper_method :request_sent?
+  helper_method :request_received_from?
   helper_method :send_friend_request_path
   helper_method :accept_friend_request_path
   helper_method :reject_friend_request_path
@@ -11,10 +15,18 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @posts = @user.posts.ordered_by_most_recent
+  end
 
-    @is_friend = current_user.friends? @user
-    @request_sent = @user.friend_responses.one? { |u| u.id == current_user.id }
-    @request_received = current_user.friend_responses.detect { |response| response.id == @user.id }
+  def friend?(user)
+    current_user.friends? user
+  end
+
+  def request_sent?(user)
+    user.friend_responses.one? { |u| u.id == current_user.id }
+  end
+
+  def request_received_from?(user)
+    current_user.friend_responses.detect { |response| response.id == user.id }
   end
 
   def send_friend_request
