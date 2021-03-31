@@ -1,0 +1,23 @@
+juan:
+  id: 1
+  name: Juan
+  email: johndoe@sample.com
+  encrypted_password: 12345678
+
+arnold:
+  id: 2
+  name: Arnold
+  email: arnold@sample.com
+  encrypted_password: 12345678
+
+juandavid:
+  id: 3
+  name: Juan David
+  email: johndoe1@sample.com
+  encrypted_password: 12345678
+
+arnold2:
+  id: 4
+  name: Arnold Sw
+  email: johndoe4@sample.com
+  encrypted_password: 12345678
