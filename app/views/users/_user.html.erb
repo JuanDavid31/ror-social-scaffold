@@ -2,17 +2,6 @@
   Name: <%= user.name %>
   <span class="profile-link">
     <%= link_to 'See Profile',  user_path(user), class: 'profile-link' %>
-    <% if current_user.id == user.id %>
-    <% elsif friend? user %>
-      <h3> is your friend </h3>
-    <% elsif request_sent? user %>
-      <h3> Friend request sent </h3>
-    <% elsif request_received_from?(user) && request_received_from?(user).status == 'Pending' %>
-      <h3> Is waiting for your response </h3>
-    <% elsif request_received_from?(user) && request_received_from?(user).status == 'Rejected' %>
-      <h3>Friend request rejected</h3>
-    <% else %>
-      <%= button_to 'Send friend request', { :controller => "users", :action => "send_friend_request", :user_id => user.id , :method=>:post }  %>
-    <% end %>
+    <%= render partial: 'user_options', locals: { user: user} %>
   </span>
 </li>
