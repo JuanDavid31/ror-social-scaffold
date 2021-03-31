@@ -33,7 +33,7 @@ RSpec.describe Friendship, type: :model do
   describe '#save' do
     it 'does create a 2nd row with opposite users' do
       friendship.save
-      expect(Friendship.all.length).to be 2
+      expect(Friendship.all.length).to be 6 # Expects 6 due to fixtures
     end
   end
 end

@@ -1,3 +1,7 @@
 post:
   content: This is quality content
   user_id: 1
+
+post1:
+  content: More quality content
+  user_id: 2
