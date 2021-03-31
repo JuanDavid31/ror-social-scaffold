@@ -1,0 +1,19 @@
+accepted:
+  user_1: 1
+  user_2: 2
+  status: Accepted
+
+pending:
+  user_1: 1
+  user_2: 3
+  status: Pending
+
+pending2:
+  user_1: 2
+  user_2: 4
+  status: Pending
+
+rejected:
+  user_1: 1
+  user_2: 4
+  status: Rejected
